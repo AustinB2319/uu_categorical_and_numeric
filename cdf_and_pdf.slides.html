@@ -7538,6 +7538,8 @@ $$</li>
 $$
 F(x) = \int_{-\infty}^x f(z)dz
 $$</li>
+<li>Since $F(x) = \text{pr}[ X \le x]$, the complementary probability is $1-F(x) = \text{pr}[X &gt; x]$</li>
+<li>Likewise, $\text{pr}[a \le X &lt; b ] = \int_{a}^{b} f(x)dx = F(b) - F(a)$</li>
 </ul>
 </div>
 </div>
@@ -7567,6 +7569,47 @@ $$</li>
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=97bb364f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">¶</a></h2><ul>
+<li>Suppose a variable is uniformly distributed, so it has distribution function:
+$$
+F(x) = \begin{cases}
+0, &amp; x &lt; 0 \\
+x, &amp; 0 \le x \le 1 \\
+1, &amp; x &gt; 1
+\end{cases}
+$$</li>
+<li>What is the probability density function, the expectation, and variance?</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2ed27ab3">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">¶</a></h2><ul>
+<li>Suppose a variable is exponentially distributed, so it has distribution function:
+$$
+F(x) = \begin{cases}
+0, &amp; x &lt; 0 \\
+1-e^{-\lambda t}, &amp; x \ge 0
+\end{cases}
+$$</li>
+<li>What is the probability density function and the expectation?</li>
+</ul>
+</div>
+</div>
+</div>
 </div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b26c0905">
 <div class="jp-Cell-inputWrapper" tabindex="0">
@@ -7574,7 +7617,7 @@ $$</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Interactive-Distribution-Helper">Interactive Distribution Helper<a class="anchor-link" href="#Interactive-Distribution-Helper">¶</a></h2><ul>
+<h2 id="Distribution-Helper">Distribution Helper<a class="anchor-link" href="#Distribution-Helper">¶</a></h2><ul>
 <li>The next examples use small interactive plots to connect parameters, densities, distribution functions, expectation, and variance</li>
 <li>Move the sliders and watch how the PDF/PMF, CDF, $\mathbb{E}[X]$, and $\mathbb{V}[X]$ change</li>
 </ul>
@@ -7586,7 +7629,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -7647,9 +7690,9 @@ $$</li>
             <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#9f2f2f"</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"E[X]"</span><span class="p">)</span>
         <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">"best"</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">mean</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span> <span class="ow">and</span> <span class="n">variance</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">sd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span>
-        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">mean</span> <span class="o">-</span> <span class="n">sd</span><span class="p">,</span> <span class="n">mean</span> <span class="o">+</span> <span class="n">sd</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#9f2f2f"</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"+/- 1 SD"</span><span class="p">)</span>
+    <span class="c1"># if mean is not None and np.isfinite(mean) and np.isfinite(variance) and variance &gt;= 0:</span>
+    <span class="c1">#     sd = np.sqrt(variance)</span>
+    <span class="c1">#     axes[0].axvspan(mean - sd, mean + sd, color="#9f2f2f", alpha=0.10, label="+/- 1 SD")</span>
 
     <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: E[X] = </span><span class="si">{</span><span class="n">_format_stat</span><span class="p">(</span><span class="n">mean</span><span class="p">)</span><span class="si">}</span><span class="s2">    V[X] = </span><span class="si">{</span><span class="n">_format_stat</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
@@ -7730,7 +7773,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
@@ -7847,7 +7890,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [33]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
@@ -7899,7 +7942,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [34]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
@@ -7951,7 +7994,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [6]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [35]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
@@ -8010,7 +8053,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [7]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [36]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
@@ -8065,7 +8108,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [8]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [37]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
@@ -8180,7 +8223,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [39]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
@@ -8238,7 +8281,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [40]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
@@ -8357,7 +8400,7 @@ $$</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="nd">@widgets</span><span class="o">.</span><span class="n">interact</span><span class="p">(</span>
